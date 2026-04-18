@@ -3,29 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>今日日报</title>
+<style>
+body{text-align:center;margin-top:40px;font-size:18px}
+a{font-size:20px;color:#007bff;text-decoration:none}
+</style>
 </head>
 <body>
+
 <h2>📅 今日日报</h2>
-<p id="time"></p>
-<h3>🖼️ 点击下方链接查看图片：</h3>
-<a id="imgLink" target="_blank">点击查看图片</a>
+<p id="date"></p>
+<br>
+<a href="https://api.tangdouz.com/a/60/" target="_blank">点击查看今日图片</a>
 
 <script>
-// 显示今天时间
-document.getElementById("time").innerText = new Date().toLocaleDateString();
-
-// 正确获取图片链接并生成可点击链接
-fetch("https://api.tangdouz.com/a/60/?return=")
-.then(r=>r.text())
-.then(u=>{
-    u = u.trim();
-    let a = document.getElementById("imgLink");
-    a.innerText = u;
-    a.href = u;
-})
-.catch(e=>{
-    document.write("加载失败");
-});
+const date = new Date()
+document.getElementById("date").innerText =
+  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日"
 </script>
+
 </body>
 </html>

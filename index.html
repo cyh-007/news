@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <title>每日日报</title>
     <style>
-        body{max-width:600px;margin:30px auto;font-size:16px;line-height:1.8;font-family:system-ui}
-        img{max-width:100%;border-radius:8px;margin:10px 0}
-        .title{font-size:20px;font-weight:bold;margin-bottom:10px}
+        body {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    <div class="title">📅 昨日日报</div>
-    <p>日期：<span id="date"></span></p>
-    <p>图片：</p>
-    <img id="pic" alt="日报图片">
+    <h2>📅 昨日日报</h2>
+    <p id="date"></p>
+    <p>🖼️ 当日图片：</p>
+    
+    <!-- 重点：直接写死图片，必显示 -->
+    <img id="dailyImg">
 
     <script>
-        // 调用你的接口获取图片
-        fetch("https://api.github.com/repos/你的用户名/仓库名/actions/workflows/daily.yml/runs?status=completed&per_page=1")
-        .then(res => res.json())
-        .then(data => {
-            // 这里将来换成你真正的图片接口
-            document.getElementById('pic').src = "https://api.tangdouz.com/a/60/?return="
-            document.getElementById('date').innerText = new Date(Date.now() - 86400000).toLocaleDateString()
-        })
+        // 自动获取昨天日期
+        const yesterday = new Date(Date.now() - 86400000).toLocaleDateString();
+        document.getElementById("date").innerText = "日期：" + yesterday;
+
+        // 强制加载图片（解决跨域问题）
+        const img = document.getElementById("dailyImg");
+        img.src = "https://api.tangdouz.com/a/60/?return=" + "?t=" + new Date().getTime();
+        img.onerror = function () {
+            img.src = "https://api.tangdouz.com/a/60/?return=";
+        };
     </script>
 </body>
 </html>

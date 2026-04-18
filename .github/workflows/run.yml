@@ -1,19 +1,14 @@
-name: run
+name: daily
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Install requests
-        run: pip install requests
-      - name: Run
-        run: python3 main.py
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python3 main.py

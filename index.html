@@ -1,41 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>每日日报</title>
-    <style>
-        body {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-        img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>日报</title>
 </head>
 <body>
-    <h2>📅 昨日日报</h2>
+    <h1>昨日日报</h1>
     <p id="date"></p>
-    <p>🖼️ 当日图片：</p>
-    
-    <!-- 重点：直接写死图片，必显示 -->
-    <img id="dailyImg">
+    <img id="pic" style="max-width:100%">
 
-    <script>
-        // 自动获取昨天日期
-        const yesterday = new Date(Date.now() - 86400000).toLocaleDateString();
-        document.getElementById("date").innerText = "日期：" + yesterday;
+<script>
+// 显示昨天日期
+const d = new Date();
+d.setDate(d.getDate() - 1);
+document.getElementById("date").innerText = d.toLocaleDateString();
 
-        // 强制加载图片（解决跨域问题）
-        const img = document.getElementById("dailyImg");
-        img.src = "https://api.tangdouz.com/a/60/?return=" + "?t=" + new Date().getTime();
-        img.onerror = function () {
-            img.src = "https://api.tangdouz.com/a/60/?return=";
-        };
-    </script>
+// 先获取图片地址，再显示图片
+fetch("https://api.tangdouz.com/a/60/?return=")
+.then(res => res.text())
+.then(url => {
+    url = url.trim();
+    document.getElementById("pic").src = url;
+})
+.catch(err => {
+    document.write("图片加载失败，请刷新");
+});
+</script>
 </body>
 </html>

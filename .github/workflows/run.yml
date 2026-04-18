@@ -5,19 +5,15 @@ on:
     branches: [main]
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-
-      - name: Install dependencies
+          python-version: "3.11"
+      - name: Install requests
         run: pip install requests
-
-      # 关键修复：进入 image-bot 文件夹再运行
-      - name: Run script
-        run: cd image-bot && python3 main.py
+      - name: Run
+        run: python3 main.py

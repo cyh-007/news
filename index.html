@@ -2,23 +2,29 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>今日日报</title>
+<title>每日日报</title>
 <style>
-body{text-align:center;margin-top:40px;font-size:18px}
-a{font-size:20px;color:#007bff;text-decoration:none}
+  body{text-align:center;margin-top:50px;font-size:18px}
 </style>
 </head>
 <body>
 
 <h2>📅 今日日报</h2>
 <p id="date"></p>
+
 <br>
-<a href="https://api.tangdouz.com/a/60/" target="_blank">点击查看今日图片</a>
+<h3><a href="javascript:goImg()">👉 点击查看今日图片</a></h3>
 
 <script>
-const date = new Date()
-document.getElementById("date").innerText =
-  date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日"
+// 显示今天日期
+const now = new Date();
+document.getElementById("date").innerText = 
+now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日";
+
+// 直接访问接口，拿到图片链接并打开
+function goImg(){
+  window.open("https://api.tangdouz.com/a/60/", "_blank");
+}
 </script>
 
 </body>

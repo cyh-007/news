@@ -1,17 +1,15 @@
 import requests
 import time
 
-URL = "https://api.tangdouz.com/a/60/?return="
-
-while True:
+def main():
     try:
-        res = requests.get(URL, timeout=10)
-        img_url = res.text.strip()
-        
-        # 直接打印图片链接，这就是你能看到的效果
-        print("当前图片链接：", img_url)
+        r = requests.get("https://api.tangdouz.com/a/60/?return=")
+        print("✅ 图片链接：", r.text.strip())
+    except:
+        print("❌ 失败")
 
-    except Exception as e:
-        print("获取失败", e)
-
-    time.sleep(60)
+if __name__ == "__main__":
+    print("🚀 程序启动")
+    while True:
+        main()
+        time.sleep(60)

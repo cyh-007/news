@@ -3,32 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <title>今日日报</title>
-<style>
-body{text-align:center;margin:30px;font-size:18px;}
-img{max-width:90%;border-radius:10px;margin-top:10px;}
-</style>
 </head>
 <body>
-
 <h2>📅 今日日报</h2>
-<p id="today"></p>
-<img id="pic">
+<p id="time"></p>
+<h3>🖼️ 点击下方链接查看图片：</h3>
+<a id="imgLink" target="_blank">点击查看图片</a>
 
 <script>
-// 当前日期（今天）
-const now = new Date();
-document.getElementById("today").innerText = now.toLocaleDateString();
+// 显示今天时间
+document.getElementById("time").innerText = new Date().toLocaleDateString();
 
-// 加载图片
+// 正确获取图片链接并生成可点击链接
 fetch("https://api.tangdouz.com/a/60/?return=")
-.then(res => res.text())
-.then(url => {
-  document.getElementById("pic").src = url.trim();
+.then(r=>r.text())
+.then(u=>{
+    u = u.trim();
+    let a = document.getElementById("imgLink");
+    a.innerText = u;
+    a.href = u;
 })
-.catch(e => {
-  document.write("图片加载失败");
+.catch(e=>{
+    document.write("加载失败");
 });
 </script>
-
 </body>
 </html>

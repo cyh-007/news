@@ -2,29 +2,33 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>日报</title>
+<title>今日日报</title>
+<style>
+body{text-align:center;margin:30px;font-size:18px;}
+img{max-width:90%;border-radius:10px;margin-top:10px;}
+</style>
 </head>
 <body>
-    <h1>昨日日报</h1>
-    <p id="date"></p>
-    <img id="pic" style="max-width:100%">
+
+<h2>📅 今日日报</h2>
+<p id="today"></p>
+<img id="pic">
 
 <script>
-// 显示昨天日期
-const d = new Date();
-d.setDate(d.getDate() - 1);
-document.getElementById("date").innerText = d.toLocaleDateString();
+// 当前日期（今天）
+const now = new Date();
+document.getElementById("today").innerText = now.toLocaleDateString();
 
-// 先获取图片地址，再显示图片
+// 加载图片
 fetch("https://api.tangdouz.com/a/60/?return=")
 .then(res => res.text())
 .then(url => {
-    url = url.trim();
-    document.getElementById("pic").src = url;
+  document.getElementById("pic").src = url.trim();
 })
-.catch(err => {
-    document.write("图片加载失败，请刷新");
+.catch(e => {
+  document.write("图片加载失败");
 });
 </script>
+
 </body>
 </html>

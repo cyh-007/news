@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>每日日报</title>
+    <style>
+        body{max-width:600px;margin:30px auto;font-size:16px;line-height:1.8;font-family:system-ui}
+        img{max-width:100%;border-radius:8px;margin:10px 0}
+        .title{font-size:20px;font-weight:bold;margin-bottom:10px}
+    </style>
+</head>
+<body>
+    <div class="title">📅 昨日日报</div>
+    <p>日期：<span id="date"></span></p>
+    <p>图片：</p>
+    <img id="pic" alt="日报图片">
+
+    <script>
+        // 调用你的接口获取图片
+        fetch("https://api.github.com/repos/你的用户名/仓库名/actions/workflows/daily.yml/runs?status=completed&per_page=1")
+        .then(res => res.json())
+        .then(data => {
+            // 这里将来换成你真正的图片接口
+            document.getElementById('pic').src = "https://api.tangdouz.com/a/60/?return="
+            document.getElementById('date').innerText = new Date(Date.now() - 86400000).toLocaleDateString()
+        })
+    </script>
+</body>
+</html>
